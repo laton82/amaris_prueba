@@ -8,6 +8,6 @@ app.get('/',(req:Request, res: Response) =>{
 });
 
 app.listen(port, ()=>{
-  console.log("conectado al puerto 3000 y prueba");
+  console.log("conectado al puerto 3000");
 });
 
