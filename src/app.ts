@@ -1,6 +1,29 @@
 import 'dotenv/config';
 import express from 'express';
+import mongoose from 'mongoose';
 const bodyParser = require('body-parser');
+const mongoPassword = process.env.MONGO_PASS; 
+const appConfig = process.env.APP_CONFIG;
+
+if(!mongoPassword || !appConfig){
+  throw new Error('variables de entorno no configuradas');
+}
+
+let config: { mongo: {user:String, hostString: String } };
+
+try{
+  config = JSON.parse(appConfig);
+}catch{
+  throw new Error('error al parsear variable de entorno');
+}
+const mongoUrl = `mongodb://${config.mongo.user}:${encodeURIComponent(mongoPassword)}@${config.mongo.hostString}`;
+
+mongoose.connect(mongoUrl).then(() =>{
+  console.log('Base de datos conectada');
+})
+.catch((error)=>{
+  console.log('Error de conexion a la base de datos', error);
+}) 
 
 const app = express();
 app.use(bodyParser.json());
