@@ -45,6 +45,11 @@ app.get('/webhook', (req, res) => {
         res.sendStatus(403);
     }
 });
+app.post('/webhook', (req, res) => {
+    const data = req.body;
+    console.log(data);
+    res.status(200).send('ok');
+});
 app.listen(port, () => {
     console.log("activo");
 });
