@@ -49,7 +49,7 @@ app.get('/webhook', (req, res) => {
 
 app.post('/webhook', (req, res) => {
   const data = req.body;
-  console.log(data);
+  console.log(JSON.stringify(data,null,2));
   res.status(200).send('ok');
 });
 
